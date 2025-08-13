@@ -179,54 +179,13 @@
             <h1>It's more fun in the PHILIPPINES!</h1>
             <p class="lead">Discover the Philippines — where every island tells a story, every smile feels like home, and every adventure leads to unforgettable memories. Explore culture, nature, and paradise. Ready for your journey? Click the button below to start your adventure!</p>
             <p class="lead">
-              <a href="home_page.php"><button type="button" class="btn btn-primary">Visit Website</button></a>
-              <!-- Trigger button -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"> Login </button>
+              <a href="../page/home.php?subpage=home"><button type="button" class="btn btn-primary">Visit Website</button></a>
             </p>
         </main>
        
       </header> 
     </div>
 
-    <!-- Login Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display:none;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <?php
-            if(isset($_GET['msg'])){
-              echo ($_GET['msg']);
-            }
-          
-          ?>
-          <form action="../views/process_data.php" method="POST">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="p-4 p-md-5 border rounded-3 bg-light"
-                  style="background-image: url('../images/philippines.jpg');
-                          background-repeat: no-repeat;
-                          background-position: center;
-                          background-size: cover;">
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="username" name="admin_username" placeholder="Username" />
-                  <label for="username">Username</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="password" class="form-control" id="password" name="admin_password" placeholder="Password" />
-                  <label for="password">Password</label>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-warning btn-sm" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary btn-sm" name="login_btn">Login</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
     <!--empty footer-->
     <footer class="mt-auto text-white-50">
 

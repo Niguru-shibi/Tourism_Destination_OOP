@@ -1,18 +1,3 @@
-<?php
-include 'connect_db.php';
-//album query
-$album_sql = "SELECT * FROM album_tb";
-$album_query = mysqli_query($conn, $album_sql);
-$album = mysqli_fetch_all($album_query);
-//print_r($album);
-
-//feature query
-$feature_sql = "SELECT * FROM feature_tb";
-$feature_query = mysqli_query($conn, $feature_sql);
-$feature = mysqli_fetch_all($feature_query);
-//print_r($feature);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +53,6 @@ $feature = mysqli_fetch_all($feature_query);
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             color: black !important;
-           
 
         }
 
@@ -251,7 +235,7 @@ $feature = mysqli_fetch_all($feature_query);
     <!--navigation-->
     <nav class="navbar navbar-expand-md navbar-white">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="../view/landing_page.php">
                 <img class="logo" src="../images/logo.jpg" alt="logo">
             </a>
 
@@ -262,13 +246,16 @@ $feature = mysqli_fetch_all($feature_query);
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="home_page.php">Home</a>
+                        <a class="nav-link active" href="?subpage=home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="services_page.php">Services</a>
+                        <a class="nav-link" href="?subpage=services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact_page.php">Contact</a>
+                        <a class="nav-link" href="?subpage=contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?subpage=login">Login</a>
                     </li>
                 </ul>
             </div>
@@ -393,191 +380,26 @@ $feature = mysqli_fetch_all($feature_query);
                 <div class="album py-5 album-bg">
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img class="imgalbum" src="<?= $album[0][1] ?>" alt="<?= $album[0][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[0][2] ?></h2>
-                                        <h5><?= $album[0][3] ?></h5>
-                                        <p class="card-text"><?= $album[0][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[0][5] ?>">View</a></button>
+                            <?php foreach ($album as $alb){ ?>
+                                    <div class="col">
+                                        <div class="card shadow-sm">
+                                            <img class="imgalbum" src="<?=  $alb['alb_img'] ?>" alt="<?=  $alb['alb_title'] ?>">
+                                            <div class="card-body">
+                                                <h2><?= $alb['alb_title'] ?></h2>
+                                                <h5><?= $alb['alb_subTitle'] ?></h5>
+                                                <p class="card-text"><?= $alb['alb_description'] ?></p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?=  $alb['alb_view'] ?>">View</a></button>
+                                                    </div>
+                                                    <small class="text-body-secondary">11 mins</small>
+                                                </div>
                                             </div>
-                                            <small class="text-body-secondary">11 mins</small>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <!-- <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg> -->
-                                    <img class="imgalbum" src="<?= $album[1][1] ?>" alt="<?= $album[1][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[1][2] ?></h2>
-                                        <h5><?= $album[1][3] ?></h5>
-                                        <p class="card-text"><?= $album[1][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[1][5] ?>">View</a></button>
-                                            </div>
-                                            <small class="text-body-secondary">19 mins</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <!-- <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg> -->
-                                    <img class="imgalbum" src="<?= $album[2][1] ?>" alt="<?= $album[2][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[2][2] ?></h2>
-                                        <h5><?= $album[2][3] ?></h5>
-                                        <p class="card-text"><?= $album[2][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[2][5] ?>">View</a></button>
-                                            </div>
-                                            <small class="text-body-secondary">26 mins</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <!-- <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <title>Placeholder</title>
-                                                                                                                                                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg> -->
-                                    <img class="imgalbum" src="<?= $album[3][1] ?>" alt="<?= $album[3][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[3][2] ?></h2>
-                                        <h5><?= $album[3][3] ?></h5>
-                                        <p class="card-text"><?= $album[3][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[3][5] ?>">View</a></button>
-                                            </div>
-                                            <small class="text-body-secondary">39 mins</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <!-- <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg> -->
-                                    <img class="imgalbum" src="<?= $album[4][1] ?>" alt="<?= $album[4][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[4][2] ?></h2>
-                                        <h5><?= $album[4][3] ?></h5>
-                                        <p class="card-text"><?= $album[4][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[4][5] ?>">View</a></button>
-                                            </div>
-                                            <small class="text-body-secondary">57 mins</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <!-- <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg> -->
-                                    <img class="imgalbum" src="<?= $album[5][1] ?>" alt="<?= $album[5][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[5][2] ?></h2>
-                                        <h5><?= $album[5][3] ?></h5>
-                                        <p class="card-text"><?= $album[5][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[5][5] ?>">View</a></button>
-                                            </div>
-                                            <small class="text-body-secondary">1 hour 8 mins</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <!-- <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg> -->
-                                    <img class="imgalbum" src="<?= $album[6][1] ?>" alt="<?= $album[6][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[6][2] ?></h2>
-                                        <h5><?= $album[6][3] ?></h5>
-                                        <p class="card-text"><?= $album[6][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[6][5] ?>">View</a></button>
-                                            </div>
-                                            <small class="text-body-secondary">1 hour 25 mins</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <!-- <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg> -->
-                                    <img class="imgalbum" src="<?= $album[7][1] ?>" alt="<?= $album[7][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[7][2] ?></h2>
-                                        <h5><?= $album[7][3] ?></h5>
-                                        <p class="card-text"><?= $album[7][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[7][5] ?>">View</a></button>
-                                            </div>
-                                            <small class="text-body-secondary">1 hour 49 mins</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <!-- <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c"></rect>
-                                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg> -->
-                                    <img class="imgalbum" src="<?= $album[8][1] ?>" alt="<?= $album[8][2] ?>">
-                                    <div class="card-body">
-                                        <h2><?= $album[8][2] ?></h2>
-                                        <h5><?= $album[8][3] ?></h5>
-                                        <p class="card-text"><?= $album[8][4] ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= $album[8][5] ?>">View</a></button>
-                                            </div>
-                                            <small class="text-body-secondary">1 hour 59 mins</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -594,123 +416,24 @@ $feature = mysqli_fetch_all($feature_query);
                         <h4 class="fst-italic">Here are some Tourists Choices!</h4>
                         <ul class="list-unstyled">
                             <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[0][1] ?>" alt="<?= $feature[0][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[0][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[0][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[0][4] ?></p>
-                                    </div>
-                                </a>
+                                <?php
+                                foreach ($feature as $ft){
+						        ?>
+                                    <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                                        <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                                            <rect width="100%" height="100%" fill="#777"></rect>
+                                        </svg>
+                                        <img class="imgblog" src="<?= $ft['ft_img'] ?>" alt="<?= $ft['ft_title'] ?>">
+                                        <div class="col-lg-8">
+                                            <h3><?= $ft['ft_title'] ?></h3>
+                                            <h6 class="mb-0"><?= $ft['ft_subTitle'] ?></h6>
+                                            <p style="text-align:justify"><?= $ft['ft_description'] ?></p>
+                                        </div>
+                                    </a>
+                                <?php
+                                }
+                                ?>
                             </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[1][1] ?>" alt="<?= $feature[1][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[1][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[1][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[1][4] ?></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[2][1] ?>" alt="<?= $feature[2][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[2][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[2][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[2][4] ?></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[3][1] ?>" alt="<?= $feature[3][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[3][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[3][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[3][4] ?></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[4][1] ?>" alt="<?= $feature[4][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[4][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[4][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[4][4] ?></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[5][1] ?>" alt="<?= $feature[5][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[5][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[5][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[5][4] ?></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[6][1] ?>" alt="<?= $feature[6][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[6][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[6][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[6][4] ?></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[7][1] ?>" alt="<?= $feature[7][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[7][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[7][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[7][4] ?></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
-                                    <svg aria-hidden="true" class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                        <rect width="100%" height="100%" fill="#777"></rect>
-                                    </svg>
-                                    <img class="imgblog" src="<?= $feature[8][1] ?>" alt="<?= $feature[8][2] ?>">
-                                    <div class="col-lg-8">
-                                        <h3><?= $feature[8][2] ?></h3>
-                                        <h6 class="mb-0"><?= $feature[8][3] ?></h6>
-                                        <p style="text-align:justify"><?= $feature[8][4] ?></p>
-                                    </div>
-                                </a>
-                            </li>
-
                         </ul>
                     </div>
                 </div>
@@ -718,3 +441,5 @@ $feature = mysqli_fetch_all($feature_query);
         </div>
     </div>
     <hr class="featurette-divider">
+
+    <?php include '../nav/footer.php';?>
