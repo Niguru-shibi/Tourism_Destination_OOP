@@ -149,6 +149,11 @@
       .px-3{
         margin-top:20rem
       }
+      .lead{
+        width: 700px;
+        text-align: center;
+        margin:auto;
+      }
     </style>
 </head>
 <body class="d-flex h-100 text-center text-bg-dark">
@@ -177,7 +182,8 @@
         <main class="px-3">
             <img class="funbanner" src="../images/funbanner1.jpg" alt="fun">
             <h1>It's more fun in the PHILIPPINES!</h1>
-            <p class="lead">Discover the Philippines — where every island tells a story, every smile feels like home, and every adventure leads to unforgettable memories. Explore culture, nature, and paradise. Ready for your journey? Click the button below to start your adventure!</p>
+            <p class="lead">Discover the Philippines — where every island tells a story, every smile feels like home, and every adventure leads to unforgettable memories. Explore culture, nature, and paradise. Ready for your journey?</p>
+            <p class="lead"> Click the button below to start your adventure!</p>
             <p class="lead">
               <a href="../page/home.php?subpage=home"><button type="button" class="btn btn-primary">Visit Website</button></a>
             </p>

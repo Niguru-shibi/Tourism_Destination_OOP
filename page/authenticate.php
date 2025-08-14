@@ -60,15 +60,14 @@
 			
 			//instantciate object
 			$username = $this->authModel->getUsername($_POST['username']);
-			
+			//print_r($username);
 			$pass = 0;
 			foreach ($username as $uname){
-				if (password_verify($_POST['password'], $uname['password'])){
+				if (password_verify($_POST['password'], $uname['admin_password'])){
 					header('location: ../page/admin.php');
 					$pass = 1;
 				}
 			}
-			
 			
 			//check for if pass value changed to 1, meaning username or password been found
 			if ($pass == 0){

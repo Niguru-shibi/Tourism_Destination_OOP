@@ -27,14 +27,14 @@
 		//encapsulation
 		private $page = '';
 		private $subpage = '';
-		protected $homeModel = '';
+		protected $model = '';
 		
 		//constructor
 		function __construct ($page){
 			$this->page = $page['page']; //assigned the property value
 			$this->subpage = $page['subpage']; //assigned the property value
 			
-			$this->homeModel = new homeModel(); //instance/object
+			$this->model = new homeModel(); //instance/object
 			
 			//run the method/behaviour
 			$this->{$page['subpage']}();
@@ -45,29 +45,31 @@
 		}
         function home(){
 			//get all the carousel in the database
-			$album = $this->homeModel->homeAlbum();
-			$feature = $this->homeModel->homeFeature();
+			$album = $this->model->homeAlbum();
+			$feature = $this->model->homeFeature();
+			$footer = $this->model->footer();
+			//print_r($footer);
 			
 			include '../view/home_page.php'; //get the views
 		}
         function services(){
 			//get all the carousel in the database
-			$services = $this->homeModel->services();
+			$services = $this->model->services();
+			$footer = $this->model->footer();
 			
 			include '../view/services_page.php'; //get the views
 		}
         function contact(){
+			$footer = $this->model->footer();
+
 			include '../view/contact_page.php'; //get the views
-		}
-        function footer(){
-            $footer = $this->homeModel->footer();
-			include '../nav/footer.php.'; //get the views
+			
 		}
         function login(){
 			include '../view/login_page.php'; //get the views
 		}
-	
-    }
+
+	}
 	//if there is an action
 	class ActiveHome{
 		//encapsulation

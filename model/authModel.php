@@ -13,7 +13,7 @@
 		#--------------------------------------------------------------#
 		function getUsername($username){
 			//getl the carousel featured destination
-			$sql = "SELECT admin_username, admin_password FROM `admin_tb` WHERE admin_password = ?";
+			$sql = "SELECT admin_username, admin_password FROM `admin_tb` WHERE admin_username = ?";
 			
 			$query = $this->conn->prepare($sql); //prepare the query
 			//bind parameter

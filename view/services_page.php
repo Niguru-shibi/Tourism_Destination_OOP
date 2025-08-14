@@ -174,4 +174,4 @@ $services = mysqli_fetch_all($services_query);
         </main>
     </div>
     <hr class="featurette-divider">
-<?php include '../nav/footer.php';?>
+ <?php include '../nav/footer.php'?>

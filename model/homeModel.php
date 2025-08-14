@@ -50,7 +50,6 @@
 			$query->execute(); //run the query
 			return $query->fetchall(PDO::FETCH_ASSOC); //get all the data and return
 		}
-		
 	}
 	
 	
