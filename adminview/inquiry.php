@@ -53,6 +53,8 @@
     <meta name="generator" content="Hugo 0.101.0">
     <title>Phillipine Guide Tourist Services | Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/logo.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
 
@@ -249,7 +251,7 @@
                                         <?php $n = 0;
                                         foreach ($notSeenMsg as $mssg): $n++ ?>
                                             <tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['inq_id']) ? 'table-success' : '' ?>"
-                                                style="font-weight:<?= $mssg['client_isSeen'] == 0 ? 'bold' : '' ?>;">
+                                                style="font-weight:40px<?= $mssg['client_isSeen'] == 0 ? 'bold' : '' ?>;">
                                                 <td align="center"><?= $n ?></td>
                                                 <td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>
                                                 <td><?php
@@ -269,13 +271,13 @@
                                                     <a class="btn btn-info btn-sm"
                                                         href="inquiry.php?page=inquiry&msg_id=<?= $mssg['client_id'] ?>"
                                                         title="VIEW">
-                                                        <span data-feather="eye" title="VIEW"></span>
+                                                        <i class="bi bi-eye"></i>
                                                     </a>
-                                                    <?php if ($mssg['client_isSeen'] == 1): ?>
+                                                    <?php if ($mssg['client_status'] == 1): ?>
                                                         <a class="btn btn-warning btn-sm"
-                                                            href="inquiry.php?page=inquiry&delete_id=<?= $mssg['client_id'] ?>"
+                                                            href="../page/admin.php?function=deletemsg&delete_id=<?= $mssg['client_id'] ?>"
                                                             title="DELETE">
-                                                            <span data-feather="trash" title="DELETE"></span>
+                                                            <i class="bi bi-trash"></i>
                                                         </a>
                                                     <?php endif ?>
                                                 </td>
@@ -300,16 +302,17 @@
                                                     ?></td>
                                                 <td align="center">
                                                     <a class="btn btn-info btn-sm"
-                                                        href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>"
-                                                        title="VIEW"
-                                                        <?= isset($_GET['msg_id']) ? 'disabled' : '' ?>>
-                                                        <span data-feather="eye" title="VIEW"></span>
+                                                        href="inquiry.php?page=inquiry&msg_id=<?= $mssg['client_id'] ?>"
+                                                        title="VIEW">
+                                                        <i class="bi bi-eye"></i>
                                                     </a>
                                                     <a class="btn btn-warning btn-sm"
                                                         href="../page/admin.php?function=deletemsg&delete_id=<?= $mssg['client_id'] ?>"
                                                         title="DELETE">
-                                                        <span data-feather="trash" title="DELETE"></span>
+                                                        <i class="bi bi-trash"></i>
                                                     </a>
+
+
                                                 </td>
                                             </tr>
                                         <?php endforeach ?>

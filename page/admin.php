@@ -102,4 +102,40 @@
 		private $subpage = '';
 		protected $adminModel = '';
 		protected $homeModel = '';
-    }
+
+		function __construct ($page){
+			$this->page = $page['page']; //assigned the property value
+			$this->subpage = $page['subpage']; //assigned the property value
+			
+			$this->adminModel = new adminModel(); //instance/object
+			$this->homeModel = new homeModel(); //instance/object
+			
+			//run the method/behaviour
+			$this->{$_GET['function']}();
+		}
+		
+		function viewmsg(){
+			//get all the message
+			$notSeenMsg = $this->adminModel->getNotSeenMsg();
+			$seenMsg = $this->adminModel->getSeenMsg();
+			
+			//get the specified message
+			$getMsg = $this->adminModel->viewmsg($_GET['msg_id']);
+			
+			include '../adminview/inquiry.php';
+		}
+		
+		function deletemsg(){
+			//get all the message
+			$notSeenMsg = $this->adminModel->getNotSeenMsg();
+			$seenMsg = $this->adminModel->getSeenMsg();
+			
+			//get all the message
+			$deletemsg = $this->adminModel->deletemsg($_GET['delete_id']);
+			
+			include '../adminview/inquiry.php';
+			echo '<script>alert("Message has been deleted!");</script>';
+		}
+		
+	}
+    

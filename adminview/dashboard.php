@@ -175,7 +175,8 @@
                             </thead>
                             <tbody> <!-- ✅ use <tbody> not <body> -->
                                 <?php $n = 0; foreach ($notSeenMsg as $mssg): $n++ ?>
-								<tr style="font-weight:<?= $mssg['client_isSeen'] == 0? 'bold':''?>;" >
+								<tr style="font-weight:<?= $mssg['client_status'] == 0? 'bold':''?>;"
+									<td></td>
 									<td align="center"><?= $n ?></td>
 									<td><?= $mssg['client_name'] != null? $mssg['client_name']:'Anonymous' ?></td>
 									<td><?php

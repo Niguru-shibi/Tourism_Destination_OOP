@@ -25,5 +25,27 @@
 			return $query->fetchall(PDO::FETCH_ASSOC); //get all the data and return
 			
 		}
+		function viewmsg($msg_id){
+			//get hero featured destination sql
+			$sql = "SELECT * FROM client_tb WHERE client_id = ?";
+			
+			$query = $this->conn->prepare($sql); //prepare the query
+			$query->bindParam(1, $msg_id);
+			$query->execute(); //run the query
+			
+			return $query->fetch(PDO::FETCH_ASSOC); //get all the data and return
+		}
+		
+		function deletemsg($id){
+			//get hero featured destination sql
+			$sql = "DELETE FROM client_tb WHERE client_id = ?";
+			
+			$query = $this->conn->prepare($sql); //prepare the query
+			$query->bindParam(1, $id);
+			$query->execute(); //run the query
+			
+			return $this->conn->lastInsertId(); //return
+		}
+		
     }
 ?>

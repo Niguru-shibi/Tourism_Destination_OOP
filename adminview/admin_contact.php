@@ -212,62 +212,75 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody> <!-- ✅ use <tbody> not <body> -->
-                                <?php $n = 0; foreach ($notSeenMsg as $mssg): $n++ ?>
-								<tr style="font-weight:<?= $mssg['client_isSeen'] == 0? 'bold':''?>;" >
-									<td align="center"><?= $n ?></td>
-									<td><?= $mssg['client_name'] != null? $mssg['client_name']:'Anonymous' ?></td>
-									<td><?php
-										//convert date from database to date and time
-										//get the raw date value (yyyy-mm-dd hh:mm:ss)
-										$dateTime = $mssg['client_time'];
-										//use explode to get the time and date separated with space ( )
-										$newDateTime = explode(' ', $dateTime);
-										//the result will be an array, index 0 (yyyy-mm-dd)
-										$date = $newDateTime[0];
-										//the result will be an array (hh:mm:ss)
-										$time = $newDateTime[1];
-										$newDate = str_replace('-','/',$date);
-										echo date('F d, Y', strtotime($newDate))." ".$time;
-									?></td>
-									<td align="center">
-										<a class="btn btn-info btn-sm fa fa-eye" 
-										   href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>"
-										   title="VIEW"
-										   >
-											<span data-feather="eye" title="VIEW"></span>
-										</a>
-									</td>
-								</tr>
-							<?php endforeach ?>
-							<?php foreach ($seenMsg as $mssg): $n++ ?>
-								<tr>
-									<td align="center"><?= $n ?></td>
-									<td><?= $mssg['client_name'] != null? $mssg['client_name']:'Anonymous' ?></td>
-									<td><?php
-										//convert date from database to date and time
-										//get the raw date value (yyyy-mm-dd hh:mm:ss)
-										$dateTime = $mssg['client_time'];
-										//use explode to get the time and date separated with space ( )
-										$newDateTime = explode(' ', $dateTime);
-										//the result will be an array, index 0 (yyyy-mm-dd)
-										$date = $newDateTime[0];
-										//the result will be an array (hh:mm:ss)
-										$time = $newDateTime[1];
-										$newDate = str_replace('-','/',$date);
-										echo date('F d, Y', strtotime($newDate))." ".$time;
-									?></td>
-									<td align="center">
-										<a class="btn btn-info btn-sm fa fa-eye" 
-										   href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>"
-										   title="VIEW"
-										   >
-											<span data-feather="eye" title="VIEW"></span>
-										</a>
-									</td>
-								</tr>
-							<?php endforeach ?>
-                            </tbody>
+                                        <tbody>
+											<?php $n = 0;
+											foreach ($notSeenMsg as $mssg): $n++ ?>
+												<tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['inq_id']) ? 'table-success' : '' ?>"
+													style="font-weight:<?= $mssg['client_isSeen'] == 0 ? 'bold' : '' ?>;">
+													<td align="center"><?= $n ?></td>
+													<td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>
+													<td><?php
+														//convert date from database to date and time
+														//get the raw date value (yyyy-mm-dd hh:mm:ss)
+														$dateTime = $mssg['client_time'];
+														//use explode to get the time and date separated with space ( )
+														$newDateTime = explode(' ', $dateTime);
+														//the result will be an array, index 0 (yyyy-mm-dd)
+														$date = $newDateTime[0];
+														//the result will be an array (hh:mm:ss)
+														$time = $newDateTime[1];
+														$newDate = str_replace('-', '/', $date);
+														echo date('F d, Y', strtotime($newDate)) . " " . $time;
+														?></td>
+													<td align="center">
+														<a class="btn btn-info btn-sm"
+															href="../adminview/admin_contact.php $mssg['client_id'] ?>"
+															title="VIEW">
+															<span data-feather="eye" title="VIEW"></span>
+														</a>
+														<?php if ($mssg['client_isSeen'] == 1): ?>
+															<a class="btn btn-warning btn-sm"
+																href="../adminview/admin_contact.php?page=admin_contact&msg_id=<?= $mssg['client_id'] ?>"
+																title="DELETE">
+																<span data-feather="trash" title="DELETE"></span>
+															</a>
+														<?php endif ?>
+													</td>
+												</tr>
+											<?php endforeach ?>
+											<?php foreach ($seenMsg as $mssg): $n++ ?>
+												<tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['client_id']) ? 'table-success' : '' ?>">
+													<td align="center"><?= $n ?></td>
+													<td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>
+													<td><?php
+														//convert date from database to date and time
+														//get the raw date value (yyyy-mm-dd hh:mm:ss)
+														$dateTime = $mssg['client_time'];
+														//use explode to get the time and date separated with space ( )
+														$newDateTime = explode(' ', $dateTime);
+														//the result will be an array, index 0 (yyyy-mm-dd)
+														$date = $newDateTime[0];
+														//the result will be an array (hh:mm:ss)
+														$time = $newDateTime[1];
+														$newDate = str_replace('-', '/', $date);
+														echo date('F d, Y', strtotime($newDate)) . " " . $time;
+														?></td>
+													<td align="center">
+														<a class="btn btn-info btn-sm"
+															href="../adminview/admin_contact.php?page=admin_contact&msg_id=<?= $mssg['client_id'] ?>"
+															title="VIEW"
+															<?= isset($_GET['msg_id']) ? 'disabled' : '' ?>>
+															<span data-feather="eye" title="VIEW"></span>
+														</a>
+														<a class="btn btn-warning btn-sm"
+															href="../adminview/admin_contact.php?page=admin_contact&msg_id=<?= $mssg['client_id'] ?>"
+															title="DELETE">
+															<span data-feather="trash" title="DELETE"></span>
+														</a>
+													</td>
+												</tr>
+											<?php endforeach ?>
+										</tbody>
                                     </table>
                                 </div>
                             </div>
