@@ -69,6 +69,7 @@
 			include '../view/login_page.php'; //get the views
 		}
 
+		
 	}
 	//if there is an action
 	class ActiveHome{
@@ -80,6 +81,18 @@
 			$this->page = $page['page']; //assigned the property value
 			$this->subpage = $page['subpage']; //assigned the property value
         }
+		public function clientmsg(){
+			if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+				$clientmsg = $this->homeModel->clientmsg();
+				$message_sent = $clientmsg ? "Message sent succesfully." : "Failed to send message.";
+			}
+
+			$footer = $this->homeModel->footer();
+
+			include '../view/contact_page.php';
+			header('Location: ../contact_page.php?msg=Message sent successfully');
+			exit;
+		}
     }    
         
 ?>

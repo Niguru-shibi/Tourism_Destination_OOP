@@ -19,14 +19,17 @@
 		<!-- Bootstrap core CSS -->
 		<link href="https://getbootstrap.com/docs/4.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-		<!-- Favicons -->
-		<link rel="manifest" href="https://getbootstrap.com/docs/4.6/assets/img/favicons/manifest.json">
+		<!-- Favicons for bootstrap 5 -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
 		<link rel="mask-icon" href="/docs/4.6/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
 		<meta name="msapplication-config" content="/docs/4.6/assets/img/favicons/browserconfig.xml">
 		<meta name="theme-color" content="#563d7c">
 
 		<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
 		<link href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap4.css" rel="stylesheet">-->
+
+
 		
 		<style>
 			.bd-placeholder-img {
@@ -193,13 +196,14 @@
 										echo date('F d, Y', strtotime($newDate))." ".$time;
 									?></td>
 									<td align="center">
-										<a class="btn btn-info btn-sm fa fa-eye" 
-										   href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>"
-										   title="VIEW"
-										   >
-											<span data-feather="eye" title="VIEW"></span>
+										<a class="btn btn-info btn-sm" 
+											href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>" 
+											title="VIEW">
+											<i class="bi bi-eye"></i>
 										</a>
 									</td>
+
+
 								</tr>
 							<?php endforeach ?>
 							<?php foreach ($seenMsg as $mssg): $n++ ?>
@@ -220,13 +224,13 @@
 										echo date('F d, Y', strtotime($newDate))." ".$time;
 									?></td>
 									<td align="center">
-										<a class="btn btn-info btn-sm fa fa-eye" 
-										   href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>"
-										   title="VIEW"
-										   >
-											<span data-feather="eye" title="VIEW"></span>
+										<a class="btn btn-info btn-sm" 
+											href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>" 
+											title="VIEW">
+											<i class="bi bi-eye"></i>
 										</a>
 									</td>
+
 								</tr>
 							<?php endforeach ?>
                             </tbody>

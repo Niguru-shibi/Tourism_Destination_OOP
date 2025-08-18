@@ -148,7 +148,7 @@
                           echo ($_GET['msg']);
                          }
                         ?>
-						<form action="process_data.php" class="p-4 p-md-5 border rounded-3  text-white" method="post">
+						<form action="../page/home.php?function=clientmsg" class="p-4 p-md-5 border rounded-3  text-white" method="POST">
                             <div class="form-floating mb-3">
 								<input type="text" class="form-control" name="client_name" placeholder="Name (optional):">
 							</div>
@@ -158,9 +158,10 @@
 							<div class="form-floating mb-3">
 								<input type="number" class="form-control" name="client_contact" placeholder="Contact Number">
 							</div>
+                            Message:
                             <div class="form-floating mb-3">
-								<input type="text" class="form-control" name="client_message" placeholder="Message/Feedback"></input>
-							</div>
+                                <textarea class="form-control" name="client_message" placeholder="Message/Feedback" style="height: 100px"></textarea>
+                            </div>
 							<button class="w-100 btn btn-lg btn-primary" type="submit" name="send_message_btn">Send</button>
 							<hr class="my-4">
 							<small style="color:white">By clicking Send, you agree to the terms of use.</small>

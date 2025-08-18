@@ -63,6 +63,9 @@
 		<meta name="msapplication-config" content="/docs/4.6/assets/img/favicons/browserconfig.xml">
 		<meta name="theme-color" content="#563d7c">
 
+		<!-- Favicons for bootstrap 5 -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
 		<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
 		<link href="https://cdn.datatables.net/2.3.2/css/dataTables.bootstrap4.css" rel="stylesheet">-->
 		
@@ -212,42 +215,39 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-											<?php $n = 0;
+                                    <tbody>
+										<?php $n = 0;
 											foreach ($notSeenMsg as $mssg): $n++ ?>
 												<tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['inq_id']) ? 'table-success' : '' ?>"
-													style="font-weight:<?= $mssg['client_isSeen'] == 0 ? 'bold' : '' ?>;">
+													style="font-weight:<?= $mssg['client_status'] == 0 ? 'bold' : '' ?>;">
 													<td align="center"><?= $n ?></td>
 													<td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>
 													<td><?php
-														//convert date from database to date and time
-														//get the raw date value (yyyy-mm-dd hh:mm:ss)
 														$dateTime = $mssg['client_time'];
-														//use explode to get the time and date separated with space ( )
 														$newDateTime = explode(' ', $dateTime);
-														//the result will be an array, index 0 (yyyy-mm-dd)
 														$date = $newDateTime[0];
-														//the result will be an array (hh:mm:ss)
 														$time = $newDateTime[1];
 														$newDate = str_replace('-', '/', $date);
 														echo date('F d, Y', strtotime($newDate)) . " " . $time;
-														?></td>
+													?></td>
 													<td align="center">
-														<a class="btn btn-info btn-sm"
-															href="../adminview/admin_contact.php $mssg['client_id'] ?>"
-															title="VIEW">
-															<span data-feather="eye" title="VIEW"></span>
+														<!-- VIEW BUTTON -->
+														<a class="btn btn-info btn-sm" 
+														href="../page/admin.php?function=viewcontact&msg_id=<?= $mssg['client_id'] ?>" 
+														title="VIEW">
+															<i class="bi bi-eye"></i>
 														</a>
-														<?php if ($mssg['client_isSeen'] == 1): ?>
-															<a class="btn btn-warning btn-sm"
-																href="../adminview/admin_contact.php?page=admin_contact&msg_id=<?= $mssg['client_id'] ?>"
-																title="DELETE">
-																<span data-feather="trash" title="DELETE"></span>
-															</a>
-														<?php endif ?>
+
+														<!-- DELETE BUTTON (always shown now) -->
+														<a class="btn btn-warning btn-sm" 
+														href="../page/admin.php?function=deletecontact&delete_id=<?= $mssg['client_id'] ?>" 
+														title="DELETE"
+														onclick="return confirm('Are you sure you want to delete this message?');">
+															<i class="bi bi-trash"></i>
+														</a>
 													</td>
 												</tr>
-											<?php endforeach ?>
+										<?php endforeach ?>
 											<?php foreach ($seenMsg as $mssg): $n++ ?>
 												<tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['client_id']) ? 'table-success' : '' ?>">
 													<td align="center"><?= $n ?></td>
@@ -266,21 +266,26 @@
 														echo date('F d, Y', strtotime($newDate)) . " " . $time;
 														?></td>
 													<td align="center">
-														<a class="btn btn-info btn-sm"
-															href="../adminview/admin_contact.php?page=admin_contact&msg_id=<?= $mssg['client_id'] ?>"
-															title="VIEW"
-															<?= isset($_GET['msg_id']) ? 'disabled' : '' ?>>
-															<span data-feather="eye" title="VIEW"></span>
+														<!-- VIEW BUTTON -->
+														<a class="btn btn-info btn-sm" 
+														href="../page/admin.php?function=viewcontact&msg_id=<?= $mssg['client_id'] ?>" 
+														title="VIEW">
+															<i class="bi bi-eye"></i>
 														</a>
-														<a class="btn btn-warning btn-sm"
-															href="../adminview/admin_contact.php?page=admin_contact&msg_id=<?= $mssg['client_id'] ?>"
-															title="DELETE">
-															<span data-feather="trash" title="DELETE"></span>
-														</a>
+
+														<!-- DELETE BUTTON (only shown if status is 1) -->
+														<?php if ($mssg['client_status'] == 1): ?>
+															<a class="btn btn-warning btn-sm" 
+															href="../page/admin.php?function=deletecontact&delete_id=<?= $mssg['client_id'] ?>" 
+															title="DELETE"
+															onclick="return confirm('Are you sure you want to delete this message?');">
+																<i class="bi bi-trash"></i>
+															</a>
+														<?php endif ?>
 													</td>
 												</tr>
 											<?php endforeach ?>
-										</tbody>
+                                    </tbody>
                                     </table>
                                 </div>
                             </div>

@@ -121,6 +121,7 @@
 		.bd-mode-toggle .dropdown-menu .active .bi {
 			display: block !important
 		}
+		
 	</style>
 </head>
 
@@ -128,7 +129,7 @@
 	<main class="form-signin" style="max-width: 400px; width: 100%;">
 		<div class="container">
 			<form action="../page/authenticate.php?function=login" method="post">
-				<img class="mb-4" src="../images/logo.jpg" alt="" width="50" height="50" style="border-radius:50px;">
+				<img class="mb-4" src="../images/logo.jpg" alt="" width="100px" height="100px" style="border-radius:50px;">
 				<h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
 
 				<div class="form-floating mb-3">

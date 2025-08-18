@@ -136,6 +136,44 @@
 			include '../adminview/inquiry.php';
 			echo '<script>alert("Message has been deleted!");</script>';
 		}
+		function viewcontact(){
+			//get all the message
+			$notSeenMsg = $this->adminModel->getNotSeenMsg();
+			$seenMsg = $this->adminModel->getSeenMsg();
+			
+			//get the specified message
+			$getMsg = $this->adminModel->viewmsg($_GET['msg_id']);
+			
+			include '../adminview/admin_contact.php';
+		}
 		
+		function deletecontact(){
+			//get all the message
+			$notSeenMsg = $this->adminModel->getNotSeenMsg();
+			$seenMsg = $this->adminModel->getSeenMsg();
+			
+			//get all the message
+			$deletemsg = $this->adminModel->deletemsg($_GET['delete_id']);
+			
+			include '../adminview/admin_contact.php';
+			echo '<script>alert("Message has been deleted!");</script>';
+		}
+
+		###########################################################
+		#     		   send client message to database            #
+		###########################################################
+
+		/*public function clientmsg(){
+			if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+				$clientmsg = $this->homeModel->clientmsg();
+				$message_sent = $clientmsg ? "Message sent succesfully." : "Failed to send message.";
+			}
+
+			$footer = $this->homeModel->footer();
+
+			include '../view/contact_page.php';
+			//header('Location: ../contact_page.php?msg=Message sent successfully');
+			//exit;
+		} */
 	}
     
