@@ -17,6 +17,9 @@
     <link href="blog.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../images/logo.jpg">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
   <style>
     .navbar {
         border: none !important;
@@ -143,30 +146,32 @@
 						<p class="col-lg-10 fs-4">Send us an enquiry, or rate us! By sending with us your feedback we can improve our services talored with your needs.</p>
 					</div>
 					<div class="col-md-10 mx-auto col-lg-5">
-                        <?php
-                          if(isset($_GET['msg'])){
-                          echo ($_GET['msg']);
-                         }
-                        ?>
-						<form action="../page/home.php?function=clientmsg" class="p-4 p-md-5 border rounded-3  text-white" method="POST">
+                        <?php if (isset($_GET['msg'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                            <?= htmlspecialchars($_GET['msg']) ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php endif; ?>
+
+                        <form action="../page/home.php?function=clientmsg" class="p-4 p-md-5 border rounded-3 text-white" method="POST">
                             <div class="form-floating mb-3">
-								<input type="text" class="form-control" name="client_name" placeholder="Name (optional):">
-							</div>
-							<div class="form-floating mb-3">
-								<input type="email" class="form-control" name="client_email" placeholder="Email">
-							</div>
-							<div class="form-floating mb-3">
-								<input type="number" class="form-control" name="client_contact" placeholder="Contact Number">
-							</div>
+                                <input type="text" class="form-control" name="client_name" placeholder="Name (optional):">
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" name="client_email" placeholder="Email">
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" name="client_contact" placeholder="Contact Number">
+                            </div>
                             Message:
                             <div class="form-floating mb-3">
                                 <textarea class="form-control" name="client_message" placeholder="Message/Feedback" style="height: 100px"></textarea>
                             </div>
-							<button class="w-100 btn btn-lg btn-primary" type="submit" name="send_message_btn">Send</button>
-							<hr class="my-4">
-							<small style="color:white">By clicking Send, you agree to the terms of use.</small>
-						</form>
-					</div>
+                            <button class="w-100 btn btn-lg btn-primary" type="submit" name="send_message_btn">Send</button>
+                            <hr class="my-4">
+                            <small style="color:white">By clicking Send, you agree to the terms of use.</small>
+                        </form>
+                    </div>
 				</div>
 	        </div>
         </div>

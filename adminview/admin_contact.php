@@ -218,7 +218,7 @@
                                     <tbody>
 										<?php $n = 0;
 											foreach ($notSeenMsg as $mssg): $n++ ?>
-												<tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['inq_id']) ? 'table-success' : '' ?>"
+												<tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['client_id']) ? 'table-success' : '' ?>"
 													style="font-weight:<?= $mssg['client_status'] == 0 ? 'bold' : '' ?>;">
 													<td align="center"><?= $n ?></td>
 													<td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>

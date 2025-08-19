@@ -1,6 +1,8 @@
 <?php
 	//model 
 	include '../model/homeModel.php';
+	include '../model/adminModel.php';
+	
 	
 	//global variable
 	$page['page'] = 'home';
@@ -76,11 +78,19 @@
 		//encapsulation
 		private $page = '';
 		private $subpage = '';
-		
-        function __construct ($page){
+		protected $adminModel = '';
+		protected $homeModel = '';
+
+		function __construct ($page){
 			$this->page = $page['page']; //assigned the property value
 			$this->subpage = $page['subpage']; //assigned the property value
-        }
+			
+			$this->adminModel = new adminModel(); //instance/object
+			$this->homeModel = new homeModel(); //instance/object
+			
+			//run the method/behaviour
+			$this->{$_GET['function']}();
+		}
 		public function clientmsg(){
 			if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 				$clientmsg = $this->homeModel->clientmsg();
@@ -90,9 +100,9 @@
 			$footer = $this->homeModel->footer();
 
 			include '../view/contact_page.php';
-			header('Location: ../contact_page.php?msg=Message sent successfully');
+			header('Location: ../view/contact_page.php?msg=' . urlencode($message_sent));
 			exit;
-		}
-    }    
+		} 
+	}
         
 ?>
