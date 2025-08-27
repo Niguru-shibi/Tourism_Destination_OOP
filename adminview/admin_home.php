@@ -92,7 +92,7 @@ $get_ft_query = mysqli_query($conn, $get_ft_sql);*/
 		</button>
 		<ul class="navbar-nav px-3">
 			<li class="nav-item text-nowrap">
-			<a class="nav-link" href="../view/landing_page.php">Sign out</a>
+				<a class="nav-link" href="../page/logout.php">Sign out</a>
 			</li>
 		</ul>
 	</nav>
@@ -212,7 +212,7 @@ $get_ft_query = mysqli_query($conn, $get_ft_sql);*/
 										<div class="modal fade" id="update_alb_<?= $alb['alb_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog" style="max-width:700px;">
 												<div class="modal-content">
-													<form action="process_data.php?page=admin_home" method="post">
+													<form action="../page/admin.php?function=albumBtn&subpage=admin_home" method="post">
 														<div class="modal-header">
 															<h5 class="modal-title" id="exampleModalLabel">Update Album Featured</h5>
 															<button type="button" class="btn btn-sm" data-dismiss="modal" style="color:red;"><span class="fa fa-exit">x</span></button>
@@ -353,7 +353,7 @@ $get_ft_query = mysqli_query($conn, $get_ft_sql);*/
 										<div class="modal fade" id="update_ft_<?= $ft['ft_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog" style="max-width:700px;">
 												<div class="modal-content">
-													<form action="process_data.php?page=admin_home" method="post">
+													<form action="../page/admin.php?function=featureBtn&subpage=admin_home" method="post">
 														<div class="modal-header">
 															<h5 class="modal-title" id="exampleModalLabel">Update Feature</h5>
 															<button type="button" class="btn btn-sm" data-dismiss="modal" style="color:red;"><span class="fa fa-exit">x</span></button>

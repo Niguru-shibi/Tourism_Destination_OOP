@@ -88,7 +88,7 @@
 		</button>
 		<ul class="navbar-nav px-3">
 			<li class="nav-item text-nowrap">
-			<a class="nav-link" href="../view/landing_page.php">Sign out</a>
+				<a class="nav-link" href="../page/logout.php">Sign out</a>
 			</li>
 		</ul>
 	</nav>
@@ -202,7 +202,7 @@
 										<div class="modal fade" id="update_serv_<?= $serv['serv_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog" style="max-width:700px;">
 												<div class="modal-content">
-													<form action="process_data.php?page=admin_home" method="post">
+													<form action="../page/admin.php?function=serveBtn&subpage=admin_services" method="post">
 														<div class="modal-header">
 															<h5 class="modal-title" id="exampleModalLabel">Update Services Featured</h5>
 															<button type="button" class="btn btn-sm" data-dismiss="modal" style="color:red;"><span class="fa fa-exit">x</span></button>

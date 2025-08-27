@@ -1,4 +1,8 @@
 <?php
+
+	//start session
+	session_start();
+
 	//model 
 	include '../model/authModel.php';
 	
@@ -64,6 +68,10 @@
 			$pass = 0;
 			foreach ($username as $uname){
 				if (password_verify($_POST['password'], $uname['admin_password'])){
+					
+					//fetch user name
+					$_SESSION['admin_username'] = $username;
+					
 					header('location: ../page/admin.php');
 					$pass = 1;
 				}

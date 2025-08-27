@@ -1,4 +1,11 @@
 <?php
+	//Start the session
+	session_start();
+	
+	if (!isset($_SESSION['admin_username'])){
+		header("location: ../page/home.php?subpage=landing_page");
+	}
+
 	//model 
 	include '../model/homeModel.php';
 	include '../model/adminModel.php';
@@ -127,10 +134,6 @@
 		
 		function deletemsg(){
 			//get all the message
-			$notSeenMsg = $this->adminModel->getNotSeenMsg();
-			$seenMsg = $this->adminModel->getSeenMsg();
-			
-			//get all the message
 			$deletemsg = $this->adminModel->deletemsg($_GET['delete_id']);
 			
 			include '../adminview/inquiry.php';
@@ -157,6 +160,112 @@
 			
 			include '../adminview/admin_contact.php';
 			echo '<script>alert("Message has been deleted!");</script>';
+		}
+
+		function albumBtn(){
+				$title = $_POST['title'];
+				$subtitle = $_POST['subtitle'];
+				$description = $_POST['description'];
+				$img = $_POST['img'];
+				$view = $_POST['view'];
+				$id = $_POST['id'];
+
+				$imgsql = "";
+				$imgLink = "0";
+
+				if (!empty($img)) {
+					$imgLink = 1;
+					$imgsql = ",alb_img = '$img'";
+				}
+
+				$albumBtn = $this->adminModel->albumBtn($_POST, $imgsql);
+
+				header('location: ../page/admin.php?subpage=admin_home');
+		}
+
+		function featureBtn(){
+				$img = $_POST['img'];
+				$title = $_POST['title'];
+				$subtitle = $_POST['subtitle'];
+				$description = $_POST['description'];
+				$id = $_POST['id'];
+
+				$imgsql = "";
+				$imgLink = "0";
+
+				if (!empty($img)) {
+					$imgLink = 1;
+					$imgsql = ",ft_img = '$img'";
+				}
+
+				$featureBtn = $this->adminModel->featureBtn($_POST, $imgsql);
+
+				header('location: ../page/admin.php?subpage=admin_home');
+		}
+		function serveBtn(){
+				$serve = $_POST['serve'];
+				$price = $_POST['price'];
+				$detail = $_POST['detail'];
+				$id = $_POST['id'];
+
+				$serveBtn = $this->adminModel->serveBtn($_POST);
+
+				header('location: ../page/admin.php?subpage=admin_services');
+		}
+		function ftrBtn(){
+				$id = $_POST['id'];
+				$name = $_POST['name'];
+				$position = $_POST['position'];
+				$desc = $_POST['desc'];
+				$changeImageLink = $_POST['changeImageLink'];
+
+				$imgLinkLoc = 0;
+				$imgLinkOnl = 0;
+				$imgLink = 0;
+				$set_img = "";
+
+				$changeImage = $_FILES['changeImage']['name'];
+
+				if (!empty($changeImage)){
+					$imgLinkLoc = 1;
+					$set_img = ", ftr_img ='".$changeImage."', ftr_imgLink = '0'";
+				}
+
+				if (!empty($changeImageLink)){
+					$term = substr($changeImageLink, 0, 8);
+
+						if ($term == "https://"){
+							$imgLinkOnl = 1;
+							$set_img = ", ftr_img = '".$changeImageLink."', ftr_imgLink = '".$imgLinkOnl."'";
+						}else{
+							echo "<script>alert('Invalid online image link!\\r\\nOnline image link should start with https:// only.');</script>";
+							echo "<script>window.history.back(-1);</script>";
+							die();
+						}
+				}
+				if ($imgLinkLoc == 1 && $imgLinkOnl == 0){
+					$target_dir = "../images/";
+					$filename = $_FILES['changeImage']['name'];
+					$target_file = $target_dir.basename($filename);
+
+					$allowed_ext = ['jpeg', 'jpg', 'png', 'webp', 'avif'];
+					$ext = pathinfo($filename, PATHINFO_EXTENSION);
+					if (in_array($ext, $allowed_ext)){
+						if(move_uploaded_file($_FILES['changeImage']['tmp_name'], $target_file)){
+							echo "uploading image successfully";
+						}else{
+							echo "error uploading image";
+						}
+					}else{
+						echo "<script>alert('Invalid file updloaded.\\r\\nFile is not an image');</script>";
+						echo "<script>window.history.back(-1);</script>";
+						die();
+					}
+				}
+				$ftrBtn = $this->adminModel->ftrBtn($_POST);
+
+				header('location: ../page/admin.php?subpage=admin_footer');
+
 		}
 
 		###########################################################
