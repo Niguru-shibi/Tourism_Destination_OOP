@@ -68,7 +68,7 @@
 	<body>
     
 	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand" href="../view/landing_page.php">
+		<a class="navbar-brand">
         <img class="logo" src="../images/logo.jpg" alt="logo">
         </a>
 		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Phillipine Guide Tourist Services</a>

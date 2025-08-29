@@ -79,7 +79,7 @@
 	<body>
     
 	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand" href="../view/landing_page.php">
+		<a class="navbar-brand">
         <img class="logo" src="../images/logo.jpg" alt="logo">
         </a>
 		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Phillipine Guide Tourist Services</a>
@@ -207,7 +207,7 @@
                                         <div class="modal fade" id="update_ftr_<?= $ftr['ftr_id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none">
 											<div class="modal-dialog" style="max-width:700px;">
 												<div class="modal-content">
-													<form action="process_data.php?page=admin_home" method="post" enctype="multipart/form-data">
+													<form action="../page/admin.php?function=ftrBtn&subpage=admin_footer" method="post" enctype="multipart/form-data">
 														<div class="modal-header">
 															<h5 class="modal-title" id="exampleModalLabel">Update Footer Featured</h5>
 															<button type="button" class="btn btn-sm" data-dismiss="modal" style="color:red;"><span class="fa fa-exit">x</span></button>

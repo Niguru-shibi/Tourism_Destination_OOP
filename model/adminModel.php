@@ -41,11 +41,32 @@
 			$sql = "DELETE FROM client_tb WHERE client_id = ?";
 			
 			$query = $this->conn->prepare($sql); //prepare the query
-			$query->bindParam(1, $id);
+			$query->bindParam(1, $delete_id);
 			$query->execute(); //run the query
 			
-			return $this->conn->lastInsertId(); //return
+			return $query->fetch(PDO::FETCH_ASSOC);//return
 		}
+		function viewcontact($msg_id){
+			//get hero featured destination sql
+			$sql = "SELECT * FROM client_tb WHERE client_id = ?";
+			
+			$query = $this->conn->prepare($sql); //prepare the query
+			$query->bindParam(1, $msg_id);
+			$query->execute(); //run the query
+			
+			return $query->fetch(PDO::FETCH_ASSOC); //get all the data and return
+		}
+		function deletecontact($id){
+			$sql = "DELETE FROM client_tb WHERE client_id = ?";
+			
+			$query = $this->conn->prepare($sql);
+			$query->bindParam(1, $id, PDO::PARAM_INT);
+			$success = $query->execute();
+			
+			return $success;
+		}
+
+
 
 		function get_alb_query(){
 			$sql = "SELECT * FROM album_tb";
@@ -159,7 +180,7 @@
 			$query->bindParam(1, $post['name']);
 			$query->bindParam(2, $post['position']);
 			$query->bindParam(3, $post['desc']);
-			$query->bindParam(5, $post['id']);
+			$query->bindParam(4, $post['id']);
 			$query->execute();
 
 			return $this->conn->lastInsertId();

@@ -41,7 +41,6 @@
   
     
 ?>
-
 <!DOCTYPE html>
 <html lang="en"><head>
 		<meta charset="utf-8">
@@ -103,9 +102,8 @@
         <script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap4.js"></script>
 	</head>
 	<body>
-    
 	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand" href="../view/landing_page.php">
+		<a class="navbar-brand">
         <img class="logo" src="../images/logo.jpg" alt="logo">
         </a>
 		<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Phillipine Guide Tourist Services</a>
@@ -294,23 +292,18 @@
                         <!-- Right side: Inquiry message details -->
                         <div class="col-md-5">
                             <div class="table-responsive">
-                                <?php
-                                if (isset($_GET['msg_client_id'])) {
-                                    $msg_id = intval($_GET['msg_client_id']);
-                                    $msg_query = "SELECT * FROM client_tb WHERE client_id = $msg_id";
-                                    $msg_result = mysqli_query($conn, $msg_query);
-
-                                    if (mysqli_num_rows($msg_result) > 0) {
-                                        $msg = mysqli_fetch_assoc($msg_result);
+                                <?php if (isset($_GET['msg_id'])) {?>
+									<?php if ($getMsg){
+                                    
                                         ?>
-                                        <p><strong>From:</strong> <strong><?= htmlspecialchars($msg['client_name']) ?></strong></p>
+                                        <p><strong>From:</strong> <strong><?= htmlspecialchars($getMsg['client_name']) ?></strong></p>
                                         <hr>
-                                        <p><?= nl2br(htmlspecialchars($msg['client_message'])) ?></p>
+                                        <p><?= nl2br(htmlspecialchars($getMsg['client_message'])) ?></p>
                                         <hr>
                                         <p>
-                                            <strong>Email:</strong> <label><?= htmlspecialchars($msg['client_email']) ?></label><br>
-                                            <strong>Contact Number:</strong> <label><?= htmlspecialchars($msg['client_contact']) ?></label><br>
-                                            <strong>Date:</strong> <label><?= date("M d, Y  h:i:s A", strtotime($msg['client_time'])) ?></label>
+                                            <strong>Email:</strong> <label><?= htmlspecialchars($getMsg['client_email']) ?></label><br>
+                                            <strong>Contact Number:</strong> <label><?= htmlspecialchars($getMsg['client_contact']) ?></label><br>
+                                            <strong>Date:</strong> <label><?= date("M d, Y  h:i:s A", strtotime($getMsg['client_time'])) ?></label>
                                         </p>
                                         <hr>
                                         <h6>Reply Client</h6>

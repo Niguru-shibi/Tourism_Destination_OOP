@@ -134,6 +134,8 @@
 		
 		function deletemsg(){
 			//get all the message
+			$notSeenMsg = $this->adminModel->getNotSeenMsg();
+			$seenMsg = $this->adminModel->getSeenMsg();
 			$deletemsg = $this->adminModel->deletemsg($_GET['delete_id']);
 			
 			include '../adminview/inquiry.php';
@@ -154,8 +156,6 @@
 			//get all the message
 			$notSeenMsg = $this->adminModel->getNotSeenMsg();
 			$seenMsg = $this->adminModel->getSeenMsg();
-			
-			//get all the message
 			$deletemsg = $this->adminModel->deletemsg($_GET['delete_id']);
 			
 			include '../adminview/admin_contact.php';
@@ -262,7 +262,7 @@
 						die();
 					}
 				}
-				$ftrBtn = $this->adminModel->ftrBtn($_POST);
+				$ftrBtn = $this->adminModel->ftrBtn($_POST, $set_img);
 
 				header('location: ../page/admin.php?subpage=admin_footer');
 

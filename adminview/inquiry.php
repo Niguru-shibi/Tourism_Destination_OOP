@@ -108,7 +108,7 @@
 <body>
 
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand" href="../view/landing_page.php">
+        <a class="navbar-brand">
             <img class="logo" src="../images/logo.jpg" alt="logo">
         </a>
         <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Phillipine Guide Tourist Services</a>
@@ -247,76 +247,77 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                <tbody>
-                                    <?php $n = 0;
-                                        foreach ($notSeenMsg as $mssg): $n++ ?>
-                                            <tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['client_id']) ? 'table-success' : '' ?>"
-                                                style="font-weight:<?= $mssg['client_status'] == 0 ? 'bold' : '' ?>;">
-                                                <td align="center"><?= $n ?></td>
-                                                <td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>
-                                                <td><?php
-                                                    $dateTime = $mssg['client_time'];
-                                                    $newDateTime = explode(' ', $dateTime);
-                                                    $date = $newDateTime[0];
-                                                    $time = $newDateTime[1];
-                                                    $newDate = str_replace('-', '/', $date);
-                                                    echo date('F d, Y', strtotime($newDate)) . " " . $time;
-                                                ?></td>
-                                                <td align="center">
-                                                    <!-- VIEW BUTTON -->
-                                                    <a class="btn btn-info btn-sm" 
-                                                    href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>" 
-                                                    title="VIEW">
-                                                        <i class="bi bi-eye"></i>
-                                                    </a>
-
-                                                    <!-- DELETE BUTTON (always shown now) -->
-                                                    <a class="btn btn-warning btn-sm" 
-                                                    href="../page/admin.php?function=deletemsg&delete_id=<?= $mssg['client_id'] ?>" 
-                                                    title="DELETE"
-                                                    onclick="return confirm('Are you sure you want to delete this message?');">
-                                                        <i class="bi bi-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                    <?php endforeach ?>
-                                        <?php foreach ($seenMsg as $mssg): $n++ ?>
-                                            <tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['client_id']) ? 'table-success' : '' ?>">
-                                                <td align="center"><?= $n ?></td>
-                                                <td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>
-                                                <td><?php
-                                                    //convert date from database to date and time
-                                                    //get the raw date value (yyyy-mm-dd hh:mm:ss)
-                                                    $dateTime = $mssg['client_time'];
-                                                    //use explode to get the time and date separated with space ( )
-                                                    $newDateTime = explode(' ', $dateTime);
-                                                    //the result will be an array, index 0 (yyyy-mm-dd)
-                                                    $date = $newDateTime[0];
-                                                    //the result will be an array (hh:mm:ss)
-                                                    $time = $newDateTime[1];
-                                                    $newDate = str_replace('-', '/', $date);
-                                                    echo date('F d, Y', strtotime($newDate)) . " " . $time;
+                                    
+                                    <tbody>
+                                        <?php $n = 0;
+                                            foreach ($notSeenMsg as $mssg): $n++ ?>
+                                                <tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['client_id']) ? 'table-success' : '' ?>"
+                                                    style="font-weight:<?= $mssg['client_status'] == 0 ? 'bold' : '' ?>;">
+                                                    <td align="center"><?= $n ?></td>
+                                                    <td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>
+                                                    <td><?php
+                                                        $dateTime = $mssg['client_time'];
+                                                        $newDateTime = explode(' ', $dateTime);
+                                                        $date = $newDateTime[0];
+                                                        $time = $newDateTime[1];
+                                                        $newDate = str_replace('-', '/', $date);
+                                                        echo date('F d, Y', strtotime($newDate)) . " " . $time;
                                                     ?></td>
-                                                <td align="center">
-                                                    <!-- VIEW BUTTON -->
-                                                    <a class="btn btn-info btn-sm" 
-                                                    href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>" 
-                                                    title="VIEW">
-                                                        <i class="bi bi-eye"></i>
-                                                    </a>
+                                                    <td align="center">
+                                                        <!-- VIEW BUTTON -->
+                                                        <a class="btn btn-info btn-sm" 
+                                                        href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>" 
+                                                        title="VIEW">
+                                                            <i class="bi bi-eye"></i>
+                                                        </a>
 
-                                                    <!-- DELETE BUTTON (only shown if status is 1) -->
-                                                    <?php if ($mssg['client_status'] == 1): ?>
+                                                        <!-- DELETE BUTTON (always shown now) -->
                                                         <a class="btn btn-warning btn-sm" 
                                                         href="../page/admin.php?function=deletemsg&delete_id=<?= $mssg['client_id'] ?>" 
                                                         title="DELETE"
                                                         onclick="return confirm('Are you sure you want to delete this message?');">
                                                             <i class="bi bi-trash"></i>
                                                         </a>
-                                                    <?php endif ?>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
                                         <?php endforeach ?>
+                                            <?php foreach ($seenMsg as $mssg): $n++ ?>
+                                                <tr class="<?= (isset($_GET['msg_id']) && $_GET['msg_id'] == $mssg['client_id']) ? 'table-success' : '' ?>">
+                                                    <td align="center"><?= $n ?></td>
+                                                    <td><?= $mssg['client_name'] != null ? $mssg['client_name'] : 'Anonymous' ?></td>
+                                                    <td><?php
+                                                        //convert date from database to date and time
+                                                        //get the raw date value (yyyy-mm-dd hh:mm:ss)
+                                                        $dateTime = $mssg['client_time'];
+                                                        //use explode to get the time and date separated with space ( )
+                                                        $newDateTime = explode(' ', $dateTime);
+                                                        //the result will be an array, index 0 (yyyy-mm-dd)
+                                                        $date = $newDateTime[0];
+                                                        //the result will be an array (hh:mm:ss)
+                                                        $time = $newDateTime[1];
+                                                        $newDate = str_replace('-', '/', $date);
+                                                        echo date('F d, Y', strtotime($newDate)) . " " . $time;
+                                                        ?></td>
+                                                    <td align="center">
+                                                        <!-- VIEW BUTTON -->
+                                                        <a class="btn btn-info btn-sm" 
+                                                        href="../page/admin.php?function=viewmsg&msg_id=<?= $mssg['client_id'] ?>"
+                                                        title="VIEW">
+                                                            <i class="bi bi-eye"></i>
+                                                        </a>
+
+                                                        <!-- DELETE BUTTON (only shown if status is 1) -->
+                                                        <?php if ($mssg['client_status'] == 1): ?>
+                                                            <a class="btn btn-warning btn-sm" 
+                                                            href="../page/admin.php?function=deletemsg&delete_id=<?= $mssg['client_id'] ?>" 
+                                                            title="DELETE"
+                                                            onclick="return confirm('Are you sure you want to delete this message?');">
+                                                                <i class="bi bi-trash"></i>
+                                                            </a>
+                                                        <?php endif ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -326,33 +327,29 @@
                     <!-- Right side: Inquiry message details -->
                     <div class="col-md-5">
                         <div class="table-responsive">
-                            <?php
-                            if (isset($_GET['msg_client_id'])) {
-                                $msg_id = intval($_GET['msg_client_id']);
-                                $msg_query = "SELECT * FROM client_tb WHERE client_id = $msg_id";
-                                $msg_result = mysqli_query($conn, $msg_query);
-
-                                if (mysqli_num_rows($msg_result) > 0) {
-                                    $msg = mysqli_fetch_assoc($msg_result);
-                            ?>
-                                    <p><strong>From:</strong> <strong><?= htmlspecialchars($msg['client_name']) ?></strong></p>
-                                    <hr>
-                                    <p><?= nl2br(htmlspecialchars($msg['client_message'])) ?></p>
-                                    <hr>
-                                    <p>
-                                        <strong>Email:</strong> <label><?= htmlspecialchars($msg['client_email']) ?></label><br>
-                                        <strong>Contact Number:</strong> <label><?= htmlspecialchars($msg['client_contact']) ?></label><br>
-                                        <strong>Date:</strong> <label><?= date("M d, Y  h:i:s A", strtotime($msg['client_time'])) ?></label>
-                                    </p>
-                            <?php
+                                <?php if (isset($_GET['msg_id'])) {?>
+									<?php if ($getMsg){
+                                    
+                                        ?>
+                                        <p><strong>From:</strong> <strong><?= htmlspecialchars($getMsg['client_name']) ?></strong></p>
+                                        <hr>
+                                        <p><?= nl2br(htmlspecialchars($getMsg['client_message'])) ?></p>
+                                        <hr>
+                                        <p>
+                                            <strong>Email:</strong> <label><?= htmlspecialchars($getMsg['client_email']) ?></label><br>
+                                            <strong>Contact Number:</strong> <label><?= htmlspecialchars($getMsg['client_contact']) ?></label><br>
+                                            <strong>Date:</strong> <label><?= date("M d, Y  h:i:s A", strtotime($getMsg['client_time'])) ?></label>
+                                        </p>
+                                        <hr>
+                                        <?php
+                                    } else {
+                                        echo '<div class="alert alert-danger">Inquiry not found.</div>';
+                                    }
                                 } else {
-                                    echo '<div class="alert alert-danger">Inquiry not found.</div>';
+                                    echo '<div class="alert alert-info" style="width:100%;">Please select an inquiry to view details.</div>';
                                 }
-                            } else {
-                                echo '<div class="alert alert-info" style="width:100%;">Please select an inquiry to view details.</div>';
-                            }
-                            ?>
-                        </div>
+                                ?>
+                            </div>
                     </div>
                 </div>
             </main>
